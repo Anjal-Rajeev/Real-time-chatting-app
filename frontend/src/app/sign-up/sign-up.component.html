@@ -1,0 +1,58 @@
+<div class="body">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="main col col-12 col-md-7 col-lg-6 col-xl-4">
+                <div class="head">
+                    <h1>SociaHub</h1>
+                    <h5>Create an account !</h5>
+                </div>
+                <div class="form">
+                    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                    <div class="inputs form-group">
+                        <div class="form-group">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="text" class="form-control" formControlName="email" >
+                        </mat-form-field><br>
+                        <div class="error">
+                            <span *ngIf="submitted && f.email.errors?.['email']">Enter valid email</span>
+                            <span *ngIf="submitted && f.email.errors?.['required']">Email required</span>  
+                        </div>                                  
+                        </div>
+                        <div class="form-group">
+                        <mat-form-field appearance="outline">
+                            <mat-label>User name</mat-label>
+                            <input matInput type="text" placeholder="enter a username" class="form-control" formControlName="userName">
+                        </mat-form-field><br>
+                        <div class="error">
+                            <span *ngIf="submitted && f.userName.errors?.['minlength']">Minimum 4 characters required</span>
+                            <span *ngIf="submitted && f.userName.errors?.['required']">User name required</span>  
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" class="form-control" formControlName="password">
+                            <button class="hide-button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <br>
+                        <div class="error">
+                            <span *ngIf="submitted && f.password.errors?.['required']">Password required</span>
+                            <span *ngIf="submitted && f.password.errors?.['minlength']">Minimum 6 characters required</span>
+                            <span>{{status}}</span>
+                        </div>
+                        </div>
+                            <button class="btn btn-primary" type="submit">Sign Up</button>      
+                    </div>
+                    <div class="para">
+                        <p>Already have an account?<a routerLink="/login"> Login</a></p>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
