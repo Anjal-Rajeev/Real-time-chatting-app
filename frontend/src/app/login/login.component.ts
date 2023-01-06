@@ -36,13 +36,12 @@ export class LoginComponent implements OnInit {
       return
     }
     else{
-      // console.log(this.loginForm.value)
+      
       let data = this.loginForm.value
-      // alert(JSON.stringify(data))
+ 
       this.auth.login(data).subscribe(res=>{
-        // console.log("from backend",res)
         let userData:any = res
-        // console.log("from backend",userData)
+
         
         if(userData.status == "1"){
           console.log(userData.status)

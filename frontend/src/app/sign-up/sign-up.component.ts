@@ -36,12 +36,28 @@ export class SignUpComponent implements OnInit {
     }
     else{
       
-      console.log(this.signupForm.value)
+      // console.log(this.signupForm.value)
       let data = this.signupForm.value
       // alert(JSON.stringify(data))
       this.auth.signup(data).subscribe(res=>{
-        console.log(res)
-        let userData
+        // console.log(res)
+        let userData:any = res
+
+        if(userData.status == "1"){
+          console.log(userData.status)
+          this.status = "Email already exists"
+          return
+        }else if(userData.status == "2"){
+          console.log(userData.status)
+          this.status = "User name already exists"
+          return
+        }
+      
+        localStorage.setItem('token', userData[1])
+        localStorage.setItem('id', userData[0]._id)
+    
+         
+        this.router.navigateByUrl('home')
       })
 
     }

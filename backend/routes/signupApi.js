@@ -35,6 +35,7 @@ router.post('', async(req, res)=>{
             const savedUser = await newUser.save()
             let token = jwt.sign(payload,CODE)
             res.status(200).send([savedUser,token])  
+            console.log(savedUser)
             console.log("successfull");
         }
   
