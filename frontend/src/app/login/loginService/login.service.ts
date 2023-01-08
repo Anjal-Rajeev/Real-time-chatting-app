@@ -19,4 +19,8 @@ export class LoginService {
     return this.http.post(`${this.server}/signup`,data)
   }
 
+  getToken(){                                //for token interceptor
+    return localStorage.getItem('token');
+  }
+
 }
