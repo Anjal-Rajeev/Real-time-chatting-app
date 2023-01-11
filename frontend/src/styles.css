@@ -6,3 +6,15 @@ body{
     margin: 0;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.mat-drawer-inner-container{
+    overflow: hidden;
+
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar{
+
+     width: 0px !important;
+     /* background-color: blueviolet;
+     opacity: 0.1 !important; */
+}

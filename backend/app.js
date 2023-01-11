@@ -20,6 +20,8 @@ app.use('/login', loginApi)
 const signupApi = require('./routes/signupApi')
 app.use('/signup', signupApi)
 
+const chatApi = require('./routes/chatApi')
+app.use('/user', chatApi)
 
 app.listen(PORT, ()=>{
     console.log("Server is running on PORT",PORT);
