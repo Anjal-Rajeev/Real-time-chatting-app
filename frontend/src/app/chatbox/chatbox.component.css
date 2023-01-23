@@ -40,6 +40,7 @@
 
 .option:hover{
     color: darkgrey;
+    cursor: pointer;
 }
 
 .name{
@@ -58,7 +59,22 @@
 .chatbox-body{
     width: 100%;
     height: 84%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 20px;
     /* border: 1px solid red; */
+}
+.chatbox-body::-webkit-scrollbar{
+    width: 1px;
+    /* background-color: rebeccapurple; */
+}
+.messages{
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: lighter !important;
+    
+    /* border: 1px solid green; */
+    width: auto !important;
 }
 .chatbox-footer{
     width: 100%;
@@ -69,6 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    
 }
 
 .msg{
@@ -80,7 +97,9 @@
     padding-left: 20px;
     margin-left: 4%;
     color :whitesmoke;
-    font-weight: lighter !important;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: 100 !important;
+    letter-spacing: 1px;
 }
 
 .msg:focus{
@@ -91,9 +110,51 @@
     font-size: xx-large;
     margin-right: 2%;
     color :darkgrey;
+    cursor: pointer;
 }
 .send:hover{
     color: lightgrey;
+}
+
+.receive-msg{
+    display: block;
+    min-width: 50px !important;
+    max-width: 60%;
+    width: fit-content;
+    line-break: strict !important;
+    /* border: 1px solid red; */
+    word-wrap: break-word;
+    padding: 5px;
+    border-radius: 5px 5px 5px 0;
+    background-color: #282A3A;
+    margin-bottom: 20px !important;
+    
+}
+.receive-msg p{
+    margin-bottom: 0;
+    min-width: 50px;
+}
+.send-container{
+    display: flex;
+    justify-content: flex-end;
+}
+.send-msg{
+    
+    min-width: 50px !important;
+    max-width: 60%;
+    width: fit-content;
+    line-break: strict !important;
+    /* border: 1px solid red; */
+    word-wrap: break-word;
+    padding: 5px;
+    border-radius: 5px 5px 0px 5px;
+    background-color: #1C6758;
+    margin-bottom: 20px !important;
+}
+.send-msg p{
+    margin-bottom: 0;
+    min-width: 50px;
+    max-width: fit-content;
 }
 
 @media only screen and (max-width: 500px)  {

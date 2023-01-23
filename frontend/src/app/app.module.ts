@@ -5,7 +5,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
@@ -46,7 +46,8 @@ import { ChatService } from './userService/chat.service';
     MatToolbarModule,
     MatListModule,
     MatButtonModule,
-    LayoutModule
+    LayoutModule,
+    FormsModule
 
   ],
   providers: [LoginService, ChatService, {

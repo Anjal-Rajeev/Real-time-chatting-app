@@ -51,13 +51,14 @@ export class HomeComponent implements OnInit {
 
   singleUser(id: any) {
     this.router.navigateByUrl(`home/user/chat/${id}`)
-    console.log(id)
+    // console.log(id)
     // RouterLinkActive
   }
 
   logout() {
     localStorage.removeItem('id');
     localStorage.removeItem('token');
+    localStorage.removeItem('user')
     this.router.navigateByUrl('/login')
   }
 

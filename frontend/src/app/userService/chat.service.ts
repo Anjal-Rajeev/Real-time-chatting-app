@@ -14,4 +14,8 @@ export class ChatService {
     return this.http.get(`${this.api}/user/users`);
   }
 
+  singleUser(id:any){
+    return this.http.get(`${this.api}/user/chat/${id}`)
+  }
+
 }

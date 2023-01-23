@@ -2,17 +2,29 @@
     <div class="container">
         <header class="chatbox-header">          
                 <img class="profile-pic" src="assets/images/dp.jpg" alt="">
-                <span class="name">User name</span><br>
-                <h6 class="online">{{onlineStatus}}</h6>
+                <span class="name">{{receiver.userName}}</span><br>
+                <!-- <h6 class="online">{{onlineStatus}}</h6> -->
                 <mat-icon class="option">more_vert</mat-icon>
         </header>
         <div class="chatbox-body">
-
+            <div class="messages" *ngFor="let message of messages">
+                <div class="receive-msg" *ngIf="message.receiver === msg.sender">
+                    <p>{{ message.msg }}</p>
+                </div>
+                <div class="send-container">
+                <div class="send-msg" *ngIf="message.sender === msg.sender">
+                    <p>{{ message.msg }}</p>     
+                </div>
+                </div>
+            </div>
         </div>
         <div class="chatbox-footer">
-            <input class="msg" type="text" placeholder="Type a message">
-            <mat-icon class="send">send</mat-icon>
+            <form class="chatbox-footer" #message="ngForm">
+            <input class="msg formControl"  type="text" placeholder="Type a message"  name="mssg" #mssg="ngModel" [(ngModel)]="newMessage" autocomplete="off">
+            <mat-icon class="send" (click)="sendMsg()">send</mat-icon>
+            </form>
         </div>
     </div>
 </div>
 
+ 
