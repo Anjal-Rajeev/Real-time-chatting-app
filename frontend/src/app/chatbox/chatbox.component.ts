@@ -57,13 +57,14 @@ export class ChatboxComponent implements OnInit {
         this.userDetails.recipient = this.userName
         this.socket.emit('register', this.userDetails);
         this.socket.on('old_message', (oldMsg) => {       
-          console.log(oldMsg);
-          if(oldMsg){
-            oldMsg.forEach((value:any) => {
-              console.log(value);
-              this.messages.push(value)
-            });
-          }
+          console.log("from backend ",oldMsg);
+          this.messages = oldMsg
+          // if(oldMsg){
+          //   oldMsg.forEach((value:any) => {
+          //     console.log(value);
+          //     this.messages.push(value)
+          //   });
+          // }
 
         })
         // Listen for messages

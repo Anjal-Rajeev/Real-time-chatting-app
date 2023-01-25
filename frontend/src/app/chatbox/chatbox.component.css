@@ -65,9 +65,14 @@
     /* border: 1px solid red; */
 }
 .chatbox-body::-webkit-scrollbar{
-    width: 1px;
+    width: 3px;
     /* background-color: rebeccapurple; */
 }
+.chatbox-body::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #404258;
+  }
 .messages{
     color: whitesmoke;
     font-family: 'Courier New', Courier, monospace;

@@ -26,6 +26,8 @@ var room1 = ""
 var room2 = ""
 var room = ""
 var data
+
+// function for creating or finding chat rooms 
 async function findRoom(user1, user2){
   console.log(user1, "-----", user2);
   room1 = `${user1}-${user2}`;
@@ -45,6 +47,14 @@ async function findRoom(user1, user2){
     console.log("not empty" , room);
   }
 }
+// for storing the incoming messages to DB
+async function storeMessage(chatRoom, msg){
+  try {
+    updatedMsg =await messageModel.updateOne({ room : chatRoom },{ $push: { messages : msg } })
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 io.on('connection', (socket)=>{
     console.log('A user connected',socket.id);
@@ -52,33 +62,24 @@ io.on('connection', (socket)=>{
      
       // Create a unique room name
       console.log(userDetails);
-      await findRoom(userDetails.sender, userDetails.recipient)
-      // roomName = room
-      // console.log("room name" , roomName);
-      // const room = `${userDetails.sender}-${userDetails.recipient}`;
+      await findRoom(userDetails.sender, userDetails.recipient)           // function for creating or finding chat rooms
 
       // Join the room
       socket.join(room.room);
       console.log("room from old msg ",room);
-      await io.to(room.room).emit('old_message',data.messages)
+      await io.to(room.room).emit('old_message',data.messages)            // send the old chats to fronend
       console.log("re sending msg ", data.messages);
   }); 
 
-  socket.on('send_message',async (msg) => {
+  socket.on('send_message',async (msg) => {                               // receiving the messages that coming from frontend
       console.log("incoming message=> ",msg);
 
-      // Create a unique room name
-      // const room = `${msg.sender}-${msg.receiver}`;
 
       // Emit the message to the specific room
       console.log("send msg ", room.room);
-      await io.to(room.room).emit('new_message', msg);
+      await io.to(room.room).emit('new_message', msg);                    // returning the messages to frontend
+      await storeMessage(room.room, msg)
   });
-
-    // socket.on('message',(data)=>{
-    //   console.log(data)
-    //   socket.emit('new',data)
-    // })
 
 
 
