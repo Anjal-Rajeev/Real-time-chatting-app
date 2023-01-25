@@ -3,6 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from '../userService/chat.service';
 import { SocketioService } from '../userService/socketio.service';
 import { io } from 'socket.io-client';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -11,6 +16,9 @@ import { io } from 'socket.io-client';
   styleUrls: ['./chatbox.component.css']
 })
 export class ChatboxComponent implements OnInit {
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   onlineStatus = "online"
   receiver: any = []         // to receive data coming from backend
@@ -34,7 +42,9 @@ export class ChatboxComponent implements OnInit {
     recipient: ""
   }
 
-  constructor(private activeRoute: ActivatedRoute, private chatService: ChatService, private router: Router, private socketioService: SocketioService) { }
+  constructor(private activeRoute: ActivatedRoute, private chatService: ChatService, 
+    private router: Router, private socketioService: SocketioService,
+    private snackBar: MatSnackBar) { }
 
 
 
@@ -49,27 +59,17 @@ export class ChatboxComponent implements OnInit {
         this.userName = this.receiver.userName
         this.socket = io('http://localhost:5000')
         this.messages = []
-        // this.socket.on('new',(data:any)=>{
-        //   console.log(data) 
-        //   this.messages.push(data)
-        //   console.log(this.messages)
-        // }) 
+    
         this.userDetails.recipient = this.userName
         this.socket.emit('register', this.userDetails);
         this.socket.on('old_message', (oldMsg) => {       
           console.log("from backend ",oldMsg);
           this.messages = oldMsg
-          // if(oldMsg){
-          //   oldMsg.forEach((value:any) => {
-          //     console.log(value);
-          //     this.messages.push(value)
-          //   });
-          // }
 
         })
         // Listen for messages
         this.socket.on('new_message', (message) => {
-          
+          this.openSnackBar()
           this.messages.push(message)
           console.log(this.messages);
         });
@@ -91,11 +91,7 @@ export class ChatboxComponent implements OnInit {
 
 
   sendMsg() {
-    // if(this.newMessage != ""){
-    
-    // this.socket.emit('message', this.msg)
-    
-    // }
+ 
     if(this.newMessage != ""){
       this.msg.msg = this.newMessage
       this.msg.receiver = this.userName
@@ -104,6 +100,14 @@ export class ChatboxComponent implements OnInit {
     }
     
 
+  }
+
+  openSnackBar() {
+    this.snackBar.open('Cannonball!!', 'Splash', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });console.log("notification");
+    
   }
 
 }
