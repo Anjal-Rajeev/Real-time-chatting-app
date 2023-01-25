@@ -106,6 +106,7 @@ export class ChatboxComponent implements OnInit {
     this.snackBar.open('Cannonball!!', 'Splash', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
+      duration: 2000
     });console.log("notification");
     
   }

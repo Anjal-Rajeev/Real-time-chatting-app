@@ -13,7 +13,9 @@ import { Router, RouterLinkActive } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   Breakpoints = Breakpoints;
-  Mode = ""
+  Mode:any = {
+    value: ''
+  }
   @ViewChild(MatDrawer)
   sidebar!: MatDrawer;
 
@@ -26,9 +28,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
       if (result.matches) {
-        this.sidebar.mode = 'over';
+        // this.sidebar.mode = "over";
+        this.Mode.value = 'over'
       } else {
-        this.sidebar.mode = 'side';
+        this.Mode.value = "side"
+        // this.sidebar.mode = 'side';
       }
     });
 
