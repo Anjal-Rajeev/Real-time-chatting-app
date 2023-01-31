@@ -35,7 +35,7 @@
                 </mat-menu>
                 
         </header>
-        <div class="chatbox-body">
+        <div class="chatbox-body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             <div class="messages" *ngFor="let message of messages">
                 <div class="receive-msg" *ngIf="message.receiver === msg.sender">
                     <p class="msg-para" [(ngModel)]="message.msg" ngDefaultControl>{{ message.msg }}</p><mat-icon [cdkCopyToClipboard]="message.msg" matTooltip="copy text" class="copy">content_copy</mat-icon>
