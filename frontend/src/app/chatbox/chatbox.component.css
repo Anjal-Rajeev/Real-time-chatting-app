@@ -89,7 +89,7 @@
     background-color: #404258;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     
 }
 
@@ -100,7 +100,7 @@
     border: none;
     border-radius: 5px;
     padding-left: 20px;
-    margin-left: 4%;
+    margin-left: 3%;
     color :whitesmoke;
     font-family:'Times New Roman', Times, serif;
     font-weight: 100 !important;
@@ -112,12 +112,15 @@
 }
 
 .send{
-    font-size: xx-large;
-    margin-right: 2%;
+    width: fit-content;
+    height: fit-content;
+    font-size:35px;
+    margin-right: 1%;
     color :darkgrey;
     cursor: pointer;
+    margin-left: 5px;
     position: relative;
-    bottom: 3px;
+    bottom: 0px;
 }
 .send:hover{
     color: lightgrey;
@@ -182,6 +185,7 @@
     color: whitesmoke;
     position: relative;
     top: 2px;
+    cursor: pointer;
 }
 .msg-para{
     display: inline;
@@ -194,7 +198,10 @@
     color: whitesmoke;
     position: relative;
     top: 2px;
+    cursor: pointer;
 }
+
+
 
 @media only screen and (max-width: 500px)  {
     .body{

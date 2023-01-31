@@ -14,7 +14,7 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 import { AppComponent } from './app.component';
@@ -55,7 +55,7 @@ import { ChatService } from './userService/chat.service';
     MatTooltipModule,
     MatMenuModule,
     MatSnackBarModule,
-
+    ClipboardModule
 
   ],
   providers: [LoginService, ChatService, {

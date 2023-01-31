@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 // import { MatSidenav } from '@angular/material';
-import { MatDrawer } from '@angular/material';
+// import { MatDrawer } from '@angular/material';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChatService } from '../userService/chat.service';
 import { Router, RouterLinkActive } from '@angular/router';
@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
   Mode:any = {
     value: ''
   }
-  @ViewChild(MatDrawer)
-  sidebar!: MatDrawer;
+  // @ViewChild(MatDrawer)
+  // sidebar!: MatDrawer;
 
   users: any = []
   usersArray: any = [{}]
