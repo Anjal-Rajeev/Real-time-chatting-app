@@ -27,6 +27,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { DefaultPageComponent } from './default-page/default-page.component';
 import { ChatboxComponent } from './chatbox/chatbox.component';
 import { ChatService } from './userService/chat.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { ChatService } from './userService/chat.service';
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptorService,
     multi:true
-  }],
+  },AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

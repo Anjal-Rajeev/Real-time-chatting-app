@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from '../userService/chat.service';
 import { SocketioService } from '../userService/socketio.service';
@@ -8,6 +8,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { ViewChild, ElementRef } from '@angular/core';
 
 
 @Component({
@@ -15,7 +16,10 @@ import {
   templateUrl: './chatbox.component.html',
   styleUrls: ['./chatbox.component.css']
 })
-export class ChatboxComponent implements OnInit {
+export class ChatboxComponent implements OnInit, AfterViewChecked {
+
+  @ViewChild('scrollMe')
+  private myScrollContainer!: ElementRef; 
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -89,7 +93,10 @@ export class ChatboxComponent implements OnInit {
 
   }
 
-
+  // for always show bottom of the scrollable page
+  ngAfterViewChecked(){
+    this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+  }
 
   ngOnDestroy() {
     if (this.socket) {
