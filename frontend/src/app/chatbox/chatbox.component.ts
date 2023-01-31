@@ -41,6 +41,7 @@ export class ChatboxComponent implements OnInit {
     sender: localStorage.getItem('user'),
     recipient: ""
   }
+  value:any
 
   loginedUserDetails:any={}               // to store logined user's data
   mutedUsers:any = []                     // to store only muted users 

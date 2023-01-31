@@ -38,11 +38,11 @@
         <div class="chatbox-body">
             <div class="messages" *ngFor="let message of messages">
                 <div class="receive-msg" *ngIf="message.receiver === msg.sender">
-                    <p class="msg-para">{{ message.msg }}</p><mat-icon class="copy">content_copy</mat-icon>
+                    <p class="msg-para" [(ngModel)]="value">{{ message.msg }}</p><mat-icon matTooltip="copy text" class="copy">content_copy</mat-icon>
                 </div>
                 <div class="send-container">
                 <div class="send-msg" *ngIf="message.sender === msg.sender">
-                    <p>{{ message.msg }}</p>     
+                    <mat-icon matTooltip="copy text" class="copy">content_copy</mat-icon><p class="msg-para">{{ message.msg }}</p>     
                 </div>
                 </div>
             </div>

@@ -175,12 +175,27 @@
     display: none;
     
 }
-.copy:hover{
+.receive-msg:hover .copy{
     display: inline;
+    font-size: smaller;
+    margin-left: 25px;
+    color: whitesmoke;
+    position: relative;
+    top: 2px;
 }
 .msg-para{
     display: inline;
 }
+
+.send-msg:hover .copy{
+    display: inline;
+    font-size: smaller;
+    margin-right: 25px;
+    color: whitesmoke;
+    position: relative;
+    top: 2px;
+}
+
 @media only screen and (max-width: 500px)  {
     .body{
         width: 100vw;

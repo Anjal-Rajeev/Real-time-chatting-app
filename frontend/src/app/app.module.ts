@@ -54,7 +54,8 @@ import { ChatService } from './userService/chat.service';
     FormsModule,
     MatTooltipModule,
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
 
   ],
   providers: [LoginService, ChatService, {
