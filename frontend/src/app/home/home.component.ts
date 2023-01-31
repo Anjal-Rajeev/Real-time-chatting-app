@@ -23,6 +23,13 @@ export class HomeComponent implements OnInit {
   usersArray: any = [{}]
   id = localStorage.getItem('id')
 
+  userDetails = {                         
+    sender: localStorage.getItem('user')
+  }
+  mutedUsers:any = []
+  blockedUsers:any = []
+  loginedUserDetails:any = {}
+
   constructor(private breakpointObserver: BreakpointObserver, private chatService: ChatService, private router: Router) { }
 
   ngOnInit(): void {
@@ -43,7 +50,7 @@ export class HomeComponent implements OnInit {
         console.log('empty')
         return
       } else {
-        this.users.forEach((value: any, index: any) => {
+        this.users.forEach((value: any, index: any) => {   // for excluding the logined user from the user's list 
           if (value._id == this.id) {
             this.users.splice(index, 1)
           }
@@ -64,6 +71,14 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('user')
     this.router.navigateByUrl('/login')
+  }
+
+  loginedUser(){
+    this.chatService.loginedUser(this.userDetails.sender).subscribe(res=>{
+      this.loginedUserDetails = res
+      this.mutedUsers = this.loginedUserDetails.mutedUsers
+      this.blockedUsers = this.loginedUserDetails.blockedUsers
+    })
   }
 
 }

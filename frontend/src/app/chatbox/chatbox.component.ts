@@ -22,10 +22,10 @@ export class ChatboxComponent implements OnInit {
 
   onlineStatus = "online"
   receiver: any = []         // to receive data coming from backend
-  userName = ""
-  msg =
+  userName = ""              // recipient user name
+  msg =                      // to send details to backend when send message function called
     {
-      msg: "",
+      msg: "",               
       sender: localStorage.getItem('user'),
       receiver: ""
     }
@@ -35,12 +35,17 @@ export class ChatboxComponent implements OnInit {
   messages: any = []         // array to store messages coming from backend
   newMessage = '';           // variable to store new messages when send button clicked
 
-  socket = io('http://localhost:5000')
+  socket = io('http://localhost:5000')    // websocket connection string
 
-  userDetails = {
+  userDetails = {                         // to send sender and recipient names to backend for creating chat rooms 
     sender: localStorage.getItem('user'),
     recipient: ""
   }
+
+  loginedUserDetails:any={}               // to store logined user's data
+  mutedUsers:any = []                     // to store only muted users 
+  blockedUsers:any = []                   // to store only blocked users
+  recipientBlockedUsers:any = []          // to store only blocked users of recipient
 
   constructor(private activeRoute: ActivatedRoute, private chatService: ChatService, 
     private router: Router, private socketioService: SocketioService,
@@ -56,22 +61,25 @@ export class ChatboxComponent implements OnInit {
       this.chatService.singleUser(id).subscribe(res => {
         this.receiver = res
         this.receiver = this.receiver[0]
+        this.recipientBlockedUsers = this.receiver.blockedUsers
         this.userName = this.receiver.userName
+        this.loginedUser()     // calling to store details of logined user
         this.socket = io('http://localhost:5000')
         this.messages = []
     
         this.userDetails.recipient = this.userName
         this.socket.emit('register', this.userDetails);
         this.socket.on('old_message', (oldMsg) => {       
-          console.log("from backend ",oldMsg);
+          // console.log("from backend ",oldMsg);
           this.messages = oldMsg
 
         })
+
         // Listen for messages
         this.socket.on('new_message', (message) => {
-          this.openSnackBar()
+          this.openSnackBar(message)
           this.messages.push(message)
-          console.log(this.messages);
+          // console.log(this.messages);
         });
       })
 
@@ -89,7 +97,7 @@ export class ChatboxComponent implements OnInit {
   }
 
 
-
+  // 
   sendMsg() {
  
     if(this.newMessage != ""){
@@ -102,13 +110,66 @@ export class ChatboxComponent implements OnInit {
 
   }
 
-  openSnackBar() {
-    this.snackBar.open('Cannonball!!', 'Splash', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 2000
-    });console.log("notification");
+  // for showing notification on incoming messages
+  openSnackBar(msg:any) {
+    if(msg.sender == localStorage.getItem('user')){
+      return
+    }else if(this.mutedUsers.includes(this.userDetails.recipient)){
+      return
+    }
+    else{
+      this.snackBar.open(`${msg.sender} : ${msg.msg}`, 'Close', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 3000
+      });
+    }
     
+     
   }
 
+  // mute function
+  muteUser(){
+    this.chatService.muteUsers(this.userDetails).subscribe(res=>{
+      console.log(res);
+      this.loginedUser()        // for refreshing to show muted or unmuted 
+    })
+  }
+
+  //Unmute function
+  unMuteUser(){
+    this.chatService.unMuteUser(this.userDetails).subscribe(res=>{
+      console.log(res);
+      this.loginedUser()        // for refreshing to show muted or unmuted
+    })
+  }
+
+  // for storing logined user's details
+  loginedUser(){
+    this.chatService.loginedUser(this.userDetails.sender).subscribe(res=>{
+      this.loginedUserDetails = res
+      this.mutedUsers = this.loginedUserDetails.mutedUsers
+      this.blockedUsers = this.loginedUserDetails.blockedUsers
+      this.recipientBlockedUsers = this.receiver.blockedUsers
+      // console.log("sender : ",this.blockedUsers);
+      // console.log("recipient : ", this.recipientBlockedUsers);
+      
+    })
+  }
+
+  // block function 
+  blockUser(){
+    this.chatService.blockUser(this.userDetails).subscribe(res =>{
+      console.log(res);
+      this.loginedUser()
+    })
+  }
+
+  // unblock user
+  unblockUser(){
+    this.chatService.unblockUser(this.userDetails).subscribe(res =>{
+      console.log(res);
+      this.loginedUser()
+    })
+  }
 }

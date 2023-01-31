@@ -12,6 +12,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 import { AppComponent } from './app.component';
@@ -49,6 +52,8 @@ import { ChatService } from './userService/chat.service';
     MatButtonModule,
     LayoutModule,
     FormsModule,
+    MatTooltipModule,
+    MatMenuModule,
     MatSnackBarModule
 
   ],

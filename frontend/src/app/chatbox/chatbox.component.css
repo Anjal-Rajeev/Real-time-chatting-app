@@ -116,6 +116,8 @@
     margin-right: 2%;
     color :darkgrey;
     cursor: pointer;
+    position: relative;
+    bottom: 3px;
 }
 .send:hover{
     color: lightgrey;
@@ -162,6 +164,23 @@
     max-width: fit-content;
 }
 
+::ng-deep .mat-menu{
+    width: 180px !important;
+    margin-left: 70px;
+    background-color: darkgray;
+    color: black;
+}
+
+.copy{
+    display: none;
+    
+}
+.copy:hover{
+    display: inline;
+}
+.msg-para{
+    display: inline;
+}
 @media only screen and (max-width: 500px)  {
     .body{
         width: 100vw;
@@ -182,8 +201,11 @@
         font-weight: lighter !important;
     }
     .send{
-        font-size :larger;
+        font-size: xx-large;
+        margin-right: 2%;
         color :darkgrey;
-        margin-left: 5px;
+        cursor: pointer;
+        position: relative;
+        bottom: 3px;
     }
 }

@@ -89,9 +89,6 @@ mat-toolbar{
     background-color: #282A3A !important;
 }
 
-span{
-    display: block;
-}
 
 .sidenav{
     width: 100%;
@@ -147,4 +144,29 @@ span{
     font-weight: lighter;
     color: darkgrey;
     letter-spacing: 0.5px;
+}
+
+.option{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+.option:hover{
+    color: whitesmoke;
+}
+::ng-deep .mat-menu1{
+    width: 200px !important;
+    margin-left: 10px;
+    background-color: darkgray;
+    color: black;
+}
+::ng-deep .mat-menu2{
+    width: 200px !important;
+    margin-left: 30px;
+    background-color: darkgray;
+    color: black;
+}
+
+.sub-heading{
+    margin-left: 15px;
 }

@@ -18,4 +18,23 @@ export class ChatService {
     return this.http.get(`${this.api}/user/chat/${id}`)
   }
 
+  muteUsers(data:any){
+    return this.http.put(`${this.api}/user/mute_users`,{data})
+  }
+
+  unMuteUser(data:any){
+    return this.http.put(`${this.api}/user/unmute_users`,{data})
+  }
+
+  loginedUser(sender:any){
+    return this.http.post(`${this.api}/user/logined_user`,{sender})
+  }
+
+  blockUser(data:any){
+    return this.http.post(`${this.api}/user/block_users`,{data})
+  }
+
+  unblockUser(data:any){
+    return this.http.post(`${this.api}/user/unblock_users`,{data})
+  }
 }

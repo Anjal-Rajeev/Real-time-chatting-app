@@ -13,6 +13,7 @@ const routes: Routes = [
   {path:'home', component:HomeComponent,
     children:[
       {path:'',component:DefaultPageComponent},
+      {path:'default', component:DefaultPageComponent},
       {path:'user/chat/:id',component:ChatboxComponent}
     ]
   },

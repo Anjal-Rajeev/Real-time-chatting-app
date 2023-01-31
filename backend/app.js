@@ -27,13 +27,14 @@ var room2 = ""
 var room = ""
 var data
 
+
 // function for creating or finding chat rooms 
 async function findRoom(user1, user2){
   console.log(user1, "-----", user2);
   room1 = `${user1}-${user2}`;
   room2 = `${user2}-${user1}`;
   data =await messageModel.findOne({ $or: [ {room : room2}, { room: room1 } ] })
-  console.log("db data ",data);
+  // console.log("db data ",data);
   if(data == null){
     console.log("empty");
     newRoom = new messageModel({room : room1, messages:[]});
@@ -41,12 +42,13 @@ async function findRoom(user1, user2){
     console.log("new  "  ,savedRoom.room);
     room = savedRoom
     data = savedRoom
-    console.log(room);
+    // console.log(room);
   }else{
     room = data
-    console.log("not empty" , room);
+    // console.log("not empty" , room);
   }
 }
+
 // for storing the incoming messages to DB
 async function storeMessage(chatRoom, msg){
   try {
@@ -68,7 +70,7 @@ io.on('connection', (socket)=>{
       socket.join(room.room);
       console.log("room from old msg ",room);
       await io.to(room.room).emit('old_message',data.messages)            // send the old chats to fronend
-      console.log("re sending msg ", data.messages);
+      // console.log("re sending msg ", data.messages);
   }); 
 
   socket.on('send_message',async (msg) => {                               // receiving the messages that coming from frontend
@@ -101,7 +103,6 @@ const signupApi = require('./routes/signupApi')
 app.use('/signup', signupApi)
 
 const chatApi = require('./routes/chatApi');
-const { Socket } = require('dgram');
 app.use('/user', chatApi)
 
 http.listen(PORT, ()=>{

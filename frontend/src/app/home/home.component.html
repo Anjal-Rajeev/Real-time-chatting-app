@@ -5,16 +5,54 @@
             <mat-toolbar class="profile-bar">
                 <mat-toolbar-row>
                     <img class="profile-pic-1" src="assets/images/dp.jpg" alt="image">
+                    <button class="option" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" (click)="loginedUser()" matTooltip="Menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu class="mat-menu1" #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>account_circle</mat-icon>
+                            <span>Profile photo</span>
+                        </button>
+                        <button mat-menu-item [matMenuTriggerFor]="mute">
+                          <mat-icon>volume_off</mat-icon>
+                          <span>Muted contacts</span>
+                        </button>
+                        <button mat-menu-item [matMenuTriggerFor]="block">
+                            <mat-icon>block</mat-icon>
+                            <span>Blocked contacts</span>
+                        </button>
+                        <button mat-menu-item matTooltip="Delete my account">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete my account</span>
+                        </button>
+                     </mat-menu>
+                    <mat-menu class="mat-menu2" #mute="matMenu">
+                        <h6 class="sub-heading">Muted Contacts</h6>
+                        <div *ngFor="let user of mutedUsers">
+                        <button mat-menu-item>
+                            <span>{{user}}</span>
+                        </button>
+                        </div>
+                    </mat-menu>
+                    <mat-menu class="mat-menu2" #block="matMenu">
+                        <h6 class="sub-heading">Blocked Contacts</h6>
+                        <div *ngFor="let user of blockedUsers">
+                        <button mat-menu-item>
+                            <span>{{user}}</span>
+                        </button>
+                        </div>
+                    </mat-menu>
                 </mat-toolbar-row>
             </mat-toolbar>
             <div class="search">
-                <form>
+                <form matTooltip="Search...">
                 <input type="text" placeholder=" Search..."><button type="submit"><mat-icon>search</mat-icon></button>
                 </form>
             </div>
             <mat-nav-list>
                 <div *ngFor="let user of users">
-                <a class="users" mat-list-item (click)="singleUser(user._id)" routerLinkActive="is-active"><img class="profile-pic" src="assets/images/dp.jpg" alt="">&nbsp;<div>{{user.userName}} <br><h4 class="last-msg">last message</h4></div>  </a><hr class="break">
+                <a class="users" mat-list-item (click)="singleUser(user._id)" routerLinkActive="is-active"><img class="profile-pic" src="assets/images/dp.jpg" alt="">&nbsp;<div>{{user.userName}} <br></div>  </a><hr class="break">
+                <!-- <h4 class="last-msg">last message</h4> -->
                 </div>
             </mat-nav-list>
             </div>
@@ -29,7 +67,7 @@
                         <mat-icon class="menu" (click)="sidebar.toggle()">menu</mat-icon>
                     </button></div>    
                     <div><h1 class="brand">SociaHub</h1></div>
-                    <div ><mat-icon class="logout" (click)="logout()">logout</mat-icon></div>                                              
+                    <div ><mat-icon matTooltip="Log out" class="logout" (click)="logout()">logout</mat-icon></div>                                              
                     </div>
                 </mat-toolbar-row>
                 </mat-toolbar>

@@ -15,6 +15,12 @@ const userSchema = mongoose.Schema({
     },
     dp:{
         type : String
+    },
+    mutedUsers:{
+        type : Array
+    },
+    blockedUsers:{
+        type : Array
     }
 })
 
