@@ -3,6 +3,7 @@ const router = express.Router()
 var jwt = require('jsonwebtoken');
 const CODE = "this is a realtime chatting application"
 const userModel = require('../models/user')
+const verifyToken = require('../middlewares/jwtVerify')
 
 
 router.post('', async(req, res)=>{
@@ -43,6 +44,21 @@ router.post('', async(req, res)=>{
     } catch (error) {
         console.log(error)
         res.json({"status":"error"})
+    }
+})
+
+router.post('/delete-account',verifyToken, async(req, res)=>{
+
+    try {
+        console.log("body from delete",req.body);
+        let id = req.body.id
+        console.log("id from body", id);
+        let deletedUser =await userModel.deleteOne({_id:id})
+        console.log(deletedUser);
+        res.status(200).send({"status":"successfully deleted"})
+    } catch (error) {
+        console.log(error)
+        res.status(500)
     }
 })
 

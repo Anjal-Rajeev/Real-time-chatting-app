@@ -105,6 +105,8 @@ app.use('/signup', signupApi)
 const chatApi = require('./routes/chatApi');
 app.use('/user', chatApi)
 
+
+
 http.listen(PORT, ()=>{
     console.log("Server is running on PORT",PORT);
 })  
