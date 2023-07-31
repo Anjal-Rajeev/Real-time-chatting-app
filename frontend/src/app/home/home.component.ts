@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChatService } from '../userService/chat.service';
 import { Router, RouterLinkActive } from '@angular/router';
+import { LoginService } from '../login/loginService/login.service';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
   blockedUsers:any = []
   loginedUserDetails:any = {}
 
-  constructor(private breakpointObserver: BreakpointObserver, private chatService: ChatService, private router: Router) { }
+  constructor(private breakpointObserver: BreakpointObserver, private chatService: ChatService, private router: Router, private loginservice: LoginService) { }
 
   ngOnInit(): void {
     this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
@@ -62,8 +63,6 @@ export class HomeComponent implements OnInit {
 
   singleUser(id: any) {
     this.router.navigateByUrl(`home/user/chat/${id}`)
-    // console.log(id)
-    // RouterLinkActive
   }
 
   logout() {
@@ -78,6 +77,13 @@ export class HomeComponent implements OnInit {
       this.loginedUserDetails = res
       this.mutedUsers = this.loginedUserDetails.mutedUsers
       this.blockedUsers = this.loginedUserDetails.blockedUsers
+    })
+  }
+
+  deleteAccount(){
+    this.loginservice.deleteAccount({id:this.id}).subscribe(res =>{
+      console.log(res)
+      this.logout()
     })
   }
 

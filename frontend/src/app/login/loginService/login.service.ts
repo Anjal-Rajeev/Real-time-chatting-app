@@ -19,6 +19,10 @@ export class LoginService {
     return this.http.post(`${this.server}/signup`,data)
   }
 
+  deleteAccount(id:any){
+    return this.http.post(`${this.server}/signup/delete-account`, id)
+  }
+
   getToken(){                                //for token interceptor
     return localStorage.getItem('token');
   }

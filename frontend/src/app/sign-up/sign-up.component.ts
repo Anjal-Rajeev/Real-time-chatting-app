@@ -55,7 +55,7 @@ export class SignUpComponent implements OnInit {
       
         localStorage.setItem('token', userData[1])
         localStorage.setItem('id', userData[0]._id)
-    
+        localStorage.setItem('user',userData[0].userName)
          
         this.router.navigateByUrl('home')
       })
